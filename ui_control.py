@@ -58,23 +58,9 @@ class MainWindow(QMainWindow):
 # 스타트기능
     def makestart(self):        # 제조시작
         self.ui.start_btn.setEnabled(False)     # 중복실행을 위해 버튼 비활성화
-        p = Process(name="pump_worker", target=pump_worker, args=(q,))
-        p.start()
+        p1 = Process(name="pump_worker", target=pump_worker, args=(q,))
+        p1.start()
 
-
-    def make_process(self):     # 제조과정
-
-        '''return_value = function() '''            # 함수 실행
-        '''
-        else if return_value == 2:
-            display amount shortage popup
-        else if return_value == 0:
-            speaker '''
-        time.sleep(1)
-
-        self.pump_error_value = 2
-        if self.pump_error_value == 2:
-            self.show_popup()
 
 # ui기능
     def toggleMenu(self, maxWidth, enable):         # 토글기능구현
@@ -103,7 +89,8 @@ class MainWindow(QMainWindow):
             msg = QMessageBox()
             x = msg.exec_()
         elif data == str(0):
-            speaker_worker()
+            p2 = Process(name="speaker", target=speaker_worker)
+            p2.start()
         self.ui.start_btn.setEnabled(True)
 
 # pump process
@@ -111,7 +98,8 @@ def pump_worker(q):
     data = str(2)
     #data = str(pump())         # data = return value of pump function
     q.put(data)
-
+    
+# speaker process
 #def speaker_worker():
     # speaker
 
