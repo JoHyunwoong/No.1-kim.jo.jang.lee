@@ -32,4 +32,5 @@ def displayTemp():
     GPIO.output(1, False)
     GPIO.cleanup()
 
+
     return temperature
