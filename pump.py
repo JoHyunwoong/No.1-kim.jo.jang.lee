@@ -38,7 +38,8 @@ def pumpAlcohol(rate, amount_sso, amount_mac):
                 return 3, amount_sso, amount_mac  # display 'amount shortage' in UI
             
             elif (amount_sso < 360 * 0.05) and (amount_mac < 0) :
-                amount_sso, amount_mac = 0
+                amount_sso= 0
+                amount_mac = 0
                 return 4, amount_sso, amount_mac  # display 'amount shortage' in UI
             
             elif (amount_sso < 0) and (amount_mac >= 500 * 0.05) :
@@ -46,7 +47,8 @@ def pumpAlcohol(rate, amount_sso, amount_mac):
                 return 5, amount_sso, amount_mac  # display 'amount shortage' in UI
             
             elif (amount_sso < 0) and (amount_mac < 500 * 0.05) :
-                amount_sso, amount_mac = 0
+                amount_sso = 0
+                amount_mac = 0
                 return 6, amount_sso, amount_mac  # display 'amount shortage' in UI
 
             # pump output
