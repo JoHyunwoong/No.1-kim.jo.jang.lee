@@ -1,5 +1,6 @@
 import os
 import time
+import csv
 
 # find naem of sensor file
 def sensor_name():
@@ -37,9 +38,18 @@ def write_temp(temp):
     f.write(str(temp))
     f.close
 
+def write_temp_data(temp, n):
+    f = open("../data/temp.csv", 'a')
+    wr = csv.writer(f)
+    wr.writerow([n, temp])
+    f.close()
+
 if __name__ == "__main__":
+    n = 1
     while(True):
         temp = read_temp()
+        write_temp_data(temp, n)
         print(temp)
         time.sleep(1)
         write_temp(temp)
+        n = n+1
