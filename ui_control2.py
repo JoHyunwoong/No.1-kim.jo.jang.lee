@@ -161,6 +161,7 @@ class Consumer(QThread):
             if not self.t.empty():
                 data = self.t.get()
                 self.poped2.emit(data)
+            time.sleep(1)
 
 def main():
     q = Queue()
