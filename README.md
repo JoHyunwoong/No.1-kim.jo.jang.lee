@@ -1,6 +1,5 @@
-# No.1-kim.jo.jang.lee.
-raspberry pi project
+pyqt 설치방법
+window - cmd - pip install pyqt5
+raspberry - sudo apt-get install python3-pyqt5
 
-ui_control2 = multithread으로 펌프 작동 구현 
-ui_control2 사용
-ui_version2 사용
+실행해야하는 파일은 ui_main.py 
