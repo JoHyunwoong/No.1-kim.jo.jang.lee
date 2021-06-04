@@ -13,6 +13,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint)
+        self.is_moving = False
         self.q = q
         self.t = t
         self.consumer = Consumer(self.q, t)

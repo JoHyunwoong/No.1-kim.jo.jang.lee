@@ -287,9 +287,11 @@ class Ui_MainWindow(object):
         self.frame_icon_top_bar.setStyleSheet("background: transparent;\n"
 "background-image: url(:/16*16/Simple_PySide_Base-master (1)/Simple_PySide_Base-master/icons/16x16/cil-mug.png);\n"
 "background-position: center;\n"
-"background-repeat: no-repeat;")
+"background-repeat: no-repeat;\n"
+"border: none;")
         self.frame_icon_top_bar.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_icon_top_bar.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_icon_top_bar.setLineWidth(0)
         self.frame_icon_top_bar.setObjectName("frame_icon_top_bar")
         self.horizontalLayout_10.addWidget(self.frame_icon_top_bar)
         self.label_title_bar_top = QtWidgets.QLabel(self.frame_label_top_btns)
@@ -559,22 +561,25 @@ class Ui_MainWindow(object):
         self.stackedWidget.setStyleSheet("background: transparent;")
         self.stackedWidget.setObjectName("stackedWidget")
         self.page_home = QtWidgets.QWidget()
+        self.page_home.setStyleSheet("border:none;")
         self.page_home.setObjectName("page_home")
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.page_home)
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.frame_2 = QtWidgets.QFrame(self.page_home)
-        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setStyleSheet("border:none;")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setLineWidth(0)
         self.frame_2.setObjectName("frame_2")
         self.label_2 = QtWidgets.QLabel(self.frame_2)
-        self.label_2.setGeometry(QtCore.QRect(80, 10, 251, 351))
+        self.label_2.setGeometry(QtCore.QRect(60, 10, 251, 351))
         self.label_2.setStyleSheet("image: url(:/newPrefix/beer3.png);")
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.beer_progressbar = QtWidgets.QProgressBar(self.frame_2)
-        self.beer_progressbar.setGeometry(QtCore.QRect(110, 10, 191, 341))
+        self.beer_progressbar.setGeometry(QtCore.QRect(90, 10, 191, 341))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(36)
@@ -601,22 +606,37 @@ class Ui_MainWindow(object):
         self.beer_progressbar.setOrientation(QtCore.Qt.Vertical)
         self.beer_progressbar.setObjectName("beer_progressbar")
         self.beer_slider = QtWidgets.QSlider(self.frame_2)
-        self.beer_slider.setGeometry(QtCore.QRect(360, 20, 31, 311))
+        self.beer_slider.setGeometry(QtCore.QRect(350, 20, 60, 321))
         font = QtGui.QFont()
         font.setPointSize(9)
         self.beer_slider.setFont(font)
-        self.beer_slider.setStyleSheet("QSlider::groove:horizontal {\n"
-"    border-radius: 9px;\n"
-"    background-color: rgb(52, 59, 72);\n"
+        self.beer_slider.setStyleSheet("QSlider:vertical {\n"
+"    min-width: 60px;\n"
+"}\n"
+"QSlider::sub-page:vertical {\n"
+"background: rgb(124,222,242);\n"
+" \n"
+" }\n"
+"QSlider::add-page:vertical {\n"
+" \n"
+"background: rgb(246,193, 1);\n"
+" \n"
+"}\n"
+"QSlider::groove:vertical {\n"
+"    width: 5px;\n"
+"    background: white; \n"
 "}\n"
 "\n"
 "QSlider::handle:vertical {\n"
+"    height: 15px;\n"
+"    margin-left: -10px;\n"
+"    margin-right: -10px;\n"
+"    \n"
 "    background-color: rgb(246, 193, 1);\n"
-"    border: none;\n"
-"    height: 18px;\n"
-"    width: 15px;\n"
-"    margin: 0px;\n"
-"    border-radius: 7px;\n"
+"}\n"
+"QSlider::handle:vertical:hover {\n"
+"   \n"
+"    background-color: rgb(246, 193, 1);\n"
 "}")
         self.beer_slider.setMaximum(100)
         self.beer_slider.setSingleStep(5)
@@ -788,7 +808,8 @@ class Ui_MainWindow(object):
         font.setFamily("Segoe UI")
         font.setPointSize(40)
         self.thermomter_image_label.setFont(font)
-        self.thermomter_image_label.setStyleSheet("image: url(:/newPrefix/온도계.png);")
+        self.thermomter_image_label.setStyleSheet("image: url(:/newPrefix/온도계.png);\n"
+"border:none")
         self.thermomter_image_label.setText("")
         self.thermomter_image_label.setAlignment(QtCore.Qt.AlignCenter)
         self.thermomter_image_label.setObjectName("thermomter_image_label")
@@ -802,12 +823,14 @@ class Ui_MainWindow(object):
         self.set_temperature_qlcd.setObjectName("set_temperature_qlcd")
         self.set_temperature_up_button = QtWidgets.QPushButton(self.page_settings)
         self.set_temperature_up_button.setGeometry(QtCore.QRect(410, 240, 75, 71))
-        self.set_temperature_up_button.setStyleSheet("image: url(:/newPrefix/위삼각형.png);")
+        self.set_temperature_up_button.setStyleSheet("image: url(:/newPrefix/위삼각형.png);\n"
+"border:none")
         self.set_temperature_up_button.setText("")
         self.set_temperature_up_button.setObjectName("set_temperature_up_button")
         self.set_temperature_down_button = QtWidgets.QPushButton(self.page_settings)
         self.set_temperature_down_button.setGeometry(QtCore.QRect(510, 240, 75, 71))
-        self.set_temperature_down_button.setStyleSheet("image: url(:/newPrefix/아래삼각형.png);")
+        self.set_temperature_down_button.setStyleSheet("image: url(:/newPrefix/아래삼각형.png);\n"
+"border:none")
         self.set_temperature_down_button.setText("")
         self.set_temperature_down_button.setObjectName("set_temperature_down_button")
         self.stackedWidget.addWidget(self.page_settings)
