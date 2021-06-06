@@ -687,34 +687,34 @@ class Ui_MainWindow(object):
         self.drink2_image_label.setText("")
         self.drink2_image_label.setAlignment(QtCore.Qt.AlignCenter)
         self.drink2_image_label.setObjectName("drink2_image_label")
-        self.drink1_replace_label = QtWidgets.QPushButton(self.page_monitor)
-        self.drink1_replace_label.setGeometry(QtCore.QRect(210, 160, 121, 61))
+        self.drink1_replace_button = QtWidgets.QPushButton(self.page_monitor)
+        self.drink1_replace_button.setGeometry(QtCore.QRect(210, 160, 121, 61))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(16)
         font.setBold(True)
         font.setWeight(75)
-        self.drink1_replace_label.setFont(font)
-        self.drink1_replace_label.setStyleSheet("QPushButton{\n"
+        self.drink1_replace_button.setFont(font)
+        self.drink1_replace_button.setStyleSheet("QPushButton{\n"
 "color: rgb(255, 255, 255);\n"
 "    background-color: rgb(0, 128, 0);\n"
 "border-radius:30px;\n"
 "}")
-        self.drink1_replace_label.setObjectName("drink1_replace_label")
-        self.drink2_replace_label = QtWidgets.QPushButton(self.page_monitor)
-        self.drink2_replace_label.setGeometry(QtCore.QRect(530, 160, 121, 61))
+        self.drink1_replace_button.setObjectName("drink1_replace_button")
+        self.drink2_replace_button = QtWidgets.QPushButton(self.page_monitor)
+        self.drink2_replace_button.setGeometry(QtCore.QRect(530, 160, 121, 61))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(16)
         font.setBold(True)
         font.setWeight(75)
-        self.drink2_replace_label.setFont(font)
-        self.drink2_replace_label.setStyleSheet("QPushButton{\n"
+        self.drink2_replace_button.setFont(font)
+        self.drink2_replace_button.setStyleSheet("QPushButton{\n"
 "color: rgb(255, 255, 255);\n"
 "    background-color: rgb(246, 193, 1);\n"
 "border-radius:30px;\n"
 "}")
-        self.drink2_replace_label.setObjectName("drink2_replace_label")
+        self.drink2_replace_button.setObjectName("drink2_replace_button")
         self.drink1_progressbar = QtWidgets.QProgressBar(self.page_monitor)
         self.drink1_progressbar.setGeometry(QtCore.QRect(60, 20, 101, 311))
         font = QtGui.QFont()
@@ -795,8 +795,8 @@ class Ui_MainWindow(object):
         self.drink1_progressbar.raise_()
         self.drink1_image_label.raise_()
         self.drink2_image_label.raise_()
-        self.drink1_replace_label.raise_()
-        self.drink2_replace_label.raise_()
+        self.drink1_replace_button.raise_()
+        self.drink2_replace_button.raise_()
         self.drink1_residual_label.raise_()
         self.drink2_residual_label.raise_()
         self.stackedWidget.addWidget(self.page_monitor)
@@ -833,6 +833,11 @@ class Ui_MainWindow(object):
 "border:none")
         self.set_temperature_down_button.setText("")
         self.set_temperature_down_button.setObjectName("set_temperature_down_button")
+        self.refrigerator_close_button = QtWidgets.QPushButton(self.page_settings)
+        self.refrigerator_close_button.setGeometry(QtCore.QRect(180, 230, 91, 81))
+        self.refrigerator_close_button.setStyleSheet("image: url(:/newPrefix/전원종료.png);")
+        self.refrigerator_close_button.setText("")
+        self.refrigerator_close_button.setObjectName("refrigerator_close_button")
         self.stackedWidget.addWidget(self.page_settings)
         self.verticalLayout_9.addWidget(self.stackedWidget)
         self.verticalLayout_4.addWidget(self.frame_content)
@@ -888,8 +893,8 @@ class Ui_MainWindow(object):
         self.btn_monitor.setText(_translate("MainWindow", "MONITOR"))
         self.btn_settings.setText(_translate("MainWindow", "SETTING"))
         self.start_button.setText(_translate("MainWindow", "START"))
-        self.drink1_replace_label.setText(_translate("MainWindow", "REPLACE"))
-        self.drink2_replace_label.setText(_translate("MainWindow", "REPLACE"))
+        self.drink1_replace_button.setText(_translate("MainWindow", "REPLACE"))
+        self.drink2_replace_button.setText(_translate("MainWindow", "REPLACE"))
         self.drink1_residual_label.setText(_translate("MainWindow", "350ml"))
         self.drink2_residual_label.setText(_translate("MainWindow", "500ml"))
 import test_rc

@@ -1,14 +1,15 @@
-from PyQt5.QtWidgets import QMainWindow, QMessageBox, QApplication
-from PyQt5.QtCore import QPropertyAnimation, QThread, pyqtSignal, QRect, Qt
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from ui_version4 import Ui_MainWindow
 from sys import exit, argv
 from threading import Thread
 from pump import *
-from multiprocessing import Queue, Process
-from ui_functions import *
 
-class MainWindow(QMainWindow):
-    def __init__(self, q, t):
+from ui_functions import UIFunctions
+from temp import *
+
+class MainWindow(UIFunctions):
+    def __init__(self, q, t, c):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -16,30 +17,34 @@ class MainWindow(QMainWindow):
         self.is_moving = False
         self.q = q
         self.t = t
+        self.c = c
         self.consumer = Consumer(self.q, t)
-        self.consumer.poped1.connect(lambda: UIFunctions.show_popup)
-        #self.consumer.poped2.connect(self.update_temperature)
+        self.consumer.poped1.connect(self.show_popup)
+        self.consumer.poped2.connect(self.update_temperature)
         self.consumer.start()
         self.beer_percent = 70
         self.amount_sso = 360
         self.amount_mac = 500
         self.temperature = 0
 
-        self.ui.btn_close.clicked.connect(lambda: self.close())
-        self.ui.btn_minimize.clicked.connect(lambda: self.showMinimized())
+        self.ui.btn_close.clicked.connect(self.close)
+        self.ui.btn_minimize.clicked.connect(self.showMinimized)
         self.ui.beer_slider.setValue(self.beer_percent)
         self.ui.beer_progressbar.setValue(self.beer_percent)
         self.ui.beer_slider.valueChanged.connect(self.ui.beer_progressbar.setValue)
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
 
-        self.ui.btn_toggle_menu.clicked.connect(lambda: UIFunctions.toggleMenu(self, 220, True))
-        self.ui.btn_home.clicked.connect(lambda: UIFunctions.showhomepage(self))
-        self.ui.btn_monitor.clicked.connect(lambda: UIFunctions.showmonitor(self))
-        self.ui.btn_settings.clicked.connect(lambda: UIFunctions.showsetting(self))
-
+        self.ui.btn_toggle_menu.clicked.connect(lambda: self.toggleMenu(220, True))
+        self.ui.btn_home.clicked.connect(self.showhomepage)
+        self.ui.btn_monitor.clicked.connect(self.showmonitor)
+        self.ui.btn_settings.clicked.connect(self.showsetting)
+        self.ui.drink1_replace_button.clicked.connect(self.replace_drink1)
+        self.ui.drink2_replace_button.clicked.connect(self.replace_drink2)
         self.ui.start_button.clicked.connect(self.makestart)
-
+        self.ui.refrigerator_close_button.clicked.connect(self.refrigerator_close)
         self.show()
+
+
 
     # 창 드래그이동
     def mousePressEvent(self, event):
@@ -57,14 +62,22 @@ class MainWindow(QMainWindow):
         p1 = Thread(target=self.worker, args=(self.q,))
         p1.start()
 
-
     # pump worker
     def worker(self, q):
-        pump_error_value, self.amount_sso, self.amount_mac = pumpAlcohol((100 - self.beer_percent)/100, self.amount_sso, self.amount_mac)
+        pump_error_value, self.amount_sso, self.amount_mac = pumpAlcohol((100 - int(self.ui.beer_progressbar.value()))/100, self.amount_sso, self.amount_mac)
         print(pump_error_value, self.amount_sso, self.amount_mac) # test print
         q.put(str(pump_error_value))
         #if pump_error_value == 0:
             #buzzer()
+
+    def update_temperature(self, data):
+        temp = data
+        self.ui.now_temperature_qlcd.display(str(temp))
+
+    def refrigerator_close(self):
+        if self.c.empty():
+            self.c.put(str(1))
+
 
 #def producer(t):
    # while True:
@@ -93,17 +106,17 @@ class Consumer(QThread):
                 self.poped2.emit(data)
             time.sleep(1)
 
-def main():
-    q = Queue()
-    t = Queue()
+def ui_main(q, t, c):
+    #q = Queue()
+    #t = Queue()
     #p = Process(name="producer", target=producer, args=(t,), daemon=True)
     #p.start()
     app = QApplication(argv)
-    main_win = MainWindow(q, t)
+    main_win = MainWindow(q, t, c)
     exit(app.exec_())
 
 if __name__ == '__main__':
-    main()
+    ui_main()
 '''
 if __name__ == '__main__':
     q = Queue()
