@@ -1,10 +1,10 @@
-import GPIO.RPi as GPIO
+#import GPIO.RPi as GPIO
 import time
 import os
-import pigpio
+#import pigpio
 
 # Setting
-GPIO.setmode(GPIO.BCM)
+#GPIO.setmode(GPIO.BCM)
 
 fan_GPIO_num = 21 # wPi 29
 
@@ -22,10 +22,14 @@ def det_fan_pwm(temp):
     else:
         return abs(temp - target_temp)/2000
 
-def fan_main():
+
+def fan_main(q):
     while True:
-        pwm = det_fan_pwm(read_temp())
-        GPIO.output(fan_GPIO_num, 1)
+        temp = q.get()
+        pwm = det_fan_pwm(temp)
+       # GPIO.output(fan_GPIO_num, 1)
         time.sleep(pwm)
-        GPIO.output(fan_GPIO_num, 0)
+        #GPIO.output(fan_GPIO_num, 0)
         time.sleep(0.01 - pwm)
+        print(temp)
+        time.sleep(1)

@@ -3,6 +3,8 @@ import time
 import csv
 import random as rd
 from threading import Thread
+from fan import *
+from queue import Queue
 
 # find naem of sensor file
 def sensor_name():
@@ -49,11 +51,15 @@ def write_temp_data(temp, n):
     f.close()
 
 
-def temp_main(q, t):
+def temp_main(t):
+    temp_queue = Queue()
+    fan_thread = Thread(target=fan_main, args=(temp_queue,))
+    fan_thread.start()
     while True:
-        #temp = calculate_temp()
+       # temp = calculate_temp()
         temp = rd.randint(0, 10)        # test
         t.put(temp)
+        temp_queue.put(temp)
         print(temp)
         time.sleep(1)
 

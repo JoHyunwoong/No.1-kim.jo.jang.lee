@@ -7,7 +7,7 @@ if __name__ == "__main__":
     t = Queue()
     c = Queue()
     p1 = Process(name="ui_main", target=ui_main, args=(q, t, c))
-    p2 = Process(name="temp_main", target=temp_main, args=(q, t))
+    p2 = Process(name="temp_main", target=temp_main, args=(t, ))
     p1.start()
     p2.start()
     while True:
@@ -16,7 +16,7 @@ if __name__ == "__main__":
             if p2.is_alive():
                 p2.kill()
             else:
-                p2 = Process(name="temp_main", target=temp_main, args=(q, t))
+                p2 = Process(name="temp_main", target=temp_main, args=(t, ))
                 p2.start()
             time.sleep(1)
         if not(p2.is_alive() and p1.is_alive()):

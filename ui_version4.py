@@ -248,6 +248,8 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
+"    outline: none;\n"
+"    border: none;\n"
 "}")
         self.btn_toggle_menu.setText("")
         self.btn_toggle_menu.setObjectName("btn_toggle_menu")
@@ -330,6 +332,8 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
+"    outline: none;\n"
+"    border: none;\n"
 "}")
         self.btn_minimize.setText("")
         icon = QtGui.QIcon()
@@ -351,6 +355,8 @@ class Ui_MainWindow(object):
 "    background-color: rgb(44, 49, 60)\n"
 "}\n"
 "QPushButton:pressed {    \n"
+"    outline: none;\n"
+"    border: none;\n"
 "    background-color: rgb(85, 170, 255);\n"
 "}")
         self.btn_close.setText("")
@@ -456,6 +462,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "    border-left: 28px solid rgb(85, 170, 255);\n"
+"    outline: none;\n"
 "}")
         self.btn_home.setObjectName("btn_home")
         self.layout_menus.addWidget(self.btn_home)
@@ -487,6 +494,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "    border-left: 28px solid rgb(85, 170, 255);\n"
+"    outline: none;\n"
 "}")
         self.btn_monitor.setObjectName("btn_monitor")
         self.layout_menus.addWidget(self.btn_monitor)
@@ -534,6 +542,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {    \n"
 "    background-color: rgb(85, 170, 255);\n"
 "    border-left: 26px solid rgb(85, 170, 255);\n"
+"    outline: none;\n"
 "}")
         self.btn_settings.setObjectName("btn_settings")
         self.layout_menu_bottom.addWidget(self.btn_settings)
@@ -634,9 +643,10 @@ class Ui_MainWindow(object):
 "    \n"
 "    background-color: rgb(246, 193, 1);\n"
 "}\n"
-"QSlider::handle:vertical:hover {\n"
-"   \n"
-"    background-color: rgb(246, 193, 1);\n"
+"QSlider::handle:vertical:pressed {\n"
+"   background-color: rgb(85, 170, 255);\n"
+"    border:none;\n"
+"    outline: none;\n"
 "}")
         self.beer_slider.setMaximum(100)
         self.beer_slider.setSingleStep(5)
@@ -653,9 +663,14 @@ class Ui_MainWindow(object):
         self.start_button.setFont(font)
         self.start_button.setStyleSheet("QPushButton{\n"
 "color: rgb(255, 255, 255);\n"
-"    \n"
+"border-color: rgb(44, 49, 60);\n"
 "    background-color: rgb(246, 193, 1);\n"
 "border-radius:30px;\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"    border:none;\n"
+"    outline: none;\n"
 "}")
         self.start_button.setObjectName("start_button")
         self.beer_progressbar.raise_()
@@ -699,6 +714,12 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);\n"
 "    background-color: rgb(0, 128, 0);\n"
 "border-radius:30px;\n"
+"border-color: rgb(44, 49, 60);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"    border:none;\n"
+"    outline: none;\n"
 "}")
         self.drink1_replace_button.setObjectName("drink1_replace_button")
         self.drink2_replace_button = QtWidgets.QPushButton(self.page_monitor)
@@ -713,6 +734,12 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);\n"
 "    background-color: rgb(246, 193, 1);\n"
 "border-radius:30px;\n"
+"border-color: rgb(44, 49, 60);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(85, 170, 255);\n"
+"    border:none;\n"
+"    outline: none;\n"
 "}")
         self.drink2_replace_button.setObjectName("drink2_replace_button")
         self.drink1_progressbar = QtWidgets.QProgressBar(self.page_monitor)
@@ -823,19 +850,45 @@ class Ui_MainWindow(object):
         self.set_temperature_qlcd.setObjectName("set_temperature_qlcd")
         self.set_temperature_up_button = QtWidgets.QPushButton(self.page_settings)
         self.set_temperature_up_button.setGeometry(QtCore.QRect(410, 240, 75, 71))
-        self.set_temperature_up_button.setStyleSheet("image: url(:/newPrefix/위삼각형.png);\n"
-"border:none")
+        self.set_temperature_up_button.setStyleSheet("QPushButton{\n"
+"image: url(:/newPrefix/위삼각형.png);\n"
+"border: none;\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    \n"
+"    image: url(:/newPrefix/위삼각형_preesed.png);\n"
+"    border:none;\n"
+"    outline: none;\n"
+"}")
         self.set_temperature_up_button.setText("")
         self.set_temperature_up_button.setObjectName("set_temperature_up_button")
         self.set_temperature_down_button = QtWidgets.QPushButton(self.page_settings)
         self.set_temperature_down_button.setGeometry(QtCore.QRect(510, 240, 75, 71))
-        self.set_temperature_down_button.setStyleSheet("image: url(:/newPrefix/아래삼각형.png);\n"
-"border:none")
+        self.set_temperature_down_button.setStyleSheet("QPushButton{\n"
+"image: url(:/newPrefix/아래삼각형.png);\n"
+"border: none;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {    \n"
+"    \n"
+"    image: url(:/newPrefix/아래삼각형_pressed.png);\n"
+"    border:none;\n"
+"    outline: none;\n"
+"}")
         self.set_temperature_down_button.setText("")
         self.set_temperature_down_button.setObjectName("set_temperature_down_button")
         self.refrigerator_close_button = QtWidgets.QPushButton(self.page_settings)
         self.refrigerator_close_button.setGeometry(QtCore.QRect(180, 230, 91, 81))
-        self.refrigerator_close_button.setStyleSheet("image: url(:/newPrefix/전원종료.png);")
+        self.refrigerator_close_button.setStyleSheet("QPushButton{\n"
+"image: url(:/newPrefix/전원종료.png);\n"
+"border: none;\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    \n"
+"    image: url(:/newPrefix/전원종료_pressed.png);\n"
+"    border:none;\n"
+"    outline: none;\n"
+"}")
         self.refrigerator_close_button.setText("")
         self.refrigerator_close_button.setObjectName("refrigerator_close_button")
         self.stackedWidget.addWidget(self.page_settings)

@@ -44,8 +44,6 @@ class MainWindow(UIFunctions):
         self.ui.refrigerator_close_button.clicked.connect(self.refrigerator_close)
         self.show()
 
-
-
     # 창 드래그이동
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
