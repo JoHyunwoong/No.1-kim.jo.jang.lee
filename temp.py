@@ -51,16 +51,14 @@ def write_temp_data(temp, n):
     f.close()
 
 
-def temp_main(t):
+def temp_main(t, target_temp):
     temp_queue = Queue()
-    fan_thread = Thread(target=fan_main, args=(temp_queue,))
+    fan_thread = Thread(target=fan_main, args=(temp_queue, target_temp))
     fan_thread.start()
     while True:
-       # temp = calculate_temp()
-        temp = rd.randint(0, 10)        # test
+        temp = calculate_temp()
         t.put(temp)
         temp_queue.put(temp)
-        print(temp)
         time.sleep(1)
 
 

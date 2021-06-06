@@ -9,7 +9,7 @@ from ui_functions import UIFunctions
 from temp import *
 
 class MainWindow(UIFunctions):
-    def __init__(self, q, t, c):
+    def __init__(self, q, t, c, target_temp):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -18,6 +18,7 @@ class MainWindow(UIFunctions):
         self.q = q
         self.t = t
         self.c = c
+        self.target_temp = target_temp
         self.consumer = Consumer(self.q, t)
         self.consumer.poped1.connect(self.show_popup)
         self.consumer.poped2.connect(self.update_temperature)
@@ -25,8 +26,10 @@ class MainWindow(UIFunctions):
         self.beer_percent = 70
         self.amount_sso = 360
         self.amount_mac = 500
-        self.temperature = 0
-
+        self.temperature = 6
+        self.ui.set_temperature_qlcd.display(str(self.temperature))
+        self.ui.set_temperature_up_button.clicked.connect(self.temperature_up)
+        self.ui.set_temperature_down_button.clicked.connect(self.temperature_down)
         self.ui.btn_close.clicked.connect(self.close)
         self.ui.btn_minimize.clicked.connect(self.showMinimized)
         self.ui.beer_slider.setValue(self.beer_percent)
@@ -104,13 +107,13 @@ class Consumer(QThread):
                 self.poped2.emit(data)
             time.sleep(1)
 
-def ui_main(q, t, c):
+def ui_main(q, t, c, target_temp):
     #q = Queue()
     #t = Queue()
     #p = Process(name="producer", target=producer, args=(t,), daemon=True)
     #p.start()
     app = QApplication(argv)
-    main_win = MainWindow(q, t, c)
+    main_win = MainWindow(q, t, c, target_temp)
     exit(app.exec_())
 
 if __name__ == '__main__':

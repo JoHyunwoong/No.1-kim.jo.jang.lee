@@ -1,4 +1,4 @@
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 
 
@@ -13,7 +13,7 @@ def pumpAlcohol(rate, amount_sso, amount_mac):
 
         try:
             # initialize GPIO
-            '''
+
             GPIO.setmode(GPIO.BCM)
 
             GPIO.setup(23, GPIO.OUT)
@@ -27,10 +27,10 @@ def pumpAlcohol(rate, amount_sso, amount_mac):
             my_pwm.start(0)
 
             my_pwm.ChangeDutyCycle(speed) #start pwm
-            '''
+
             sec1 = (180 * rate) / amount_per_sec
             sec2 = (180 * (1 - rate)) / amount_per_sec
-            '''
+
             # pump output
             GPIO.output(23, True)
             GPIO.output(24, True)
@@ -42,7 +42,7 @@ def pumpAlcohol(rate, amount_sso, amount_mac):
             GPIO.output(24, False)
 
             GPIO.cleanup()
-            '''
+
             amount_sso -= sec1 * amount_per_sec
             amount_mac -= sec2 * amount_per_sec
 

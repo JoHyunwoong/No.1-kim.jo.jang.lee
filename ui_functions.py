@@ -52,6 +52,18 @@ class UIFunctions(QMainWindow):
         self.ui.drink2_progressbar.setValue(self.amount_mac/500 * 100)
         self.ui.drink2_residual_label.setText(str(self.amount_mac))
 
+    def temperature_up(self):
+        self.temperature += 1
+        self.target_temp.put(self.temperature)
+        self.ui.set_temperature_qlcd.display(str(self.temperature))
+
+
+    def temperature_down(self):
+        self.temperature -= 1
+        self.target_temp.put(self.temperature)
+        self.ui.set_temperature_qlcd.display(str(self.temperature))
+
+
     # 오류 팝업     poped1 연결
     def show_popup(self, data):
         if data == str(1):
