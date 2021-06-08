@@ -6,7 +6,7 @@ import pigpio
 # Setting
 GPIO.setmode(GPIO.BCM)
 
-fan_GPIO_num = 21 # wPi 29
+fan_GPIO_num = 17 # wPi 0
 
 def read_temp():
     f = open("../data/temperature.txt", 'r')
