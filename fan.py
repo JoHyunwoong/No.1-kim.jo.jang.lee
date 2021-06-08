@@ -1,13 +1,14 @@
-#import GPIO.RPi as GPIO
+import RPI.GPIO as GPIO
 import time
 import os
-#import pigpio
+import pigpio
 
 # Setting
-#GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 
-fan_GPIO_num = 21 # wPi 29
+fan_GPIO_num = 17   # wPi 0
 
+GPIO.setup(fan_GPIO_num, GPIO.OUT)
 def read_temp():
     f = open("../data/temperature.txt", 'r')
     s = f.readline()
@@ -15,21 +16,20 @@ def read_temp():
     return s
 
 # Determine fan pwm value
-def det_fan_pwm(temp):
-    target_temp = 4.0
-    if((temp - target_temp) > 20):
+def det_fan_pwm(temp, target_temp):
+    print(target_temp)
+    if (temp - target_temp) > 20:
         return 0.01
     else:
         return abs(temp - target_temp)/2000
 
 
-def fan_main(q):
+def fan_main(SharedMemory):
     while True:
-        temp = q.get()
-        pwm = det_fan_pwm(temp)
-       # GPIO.output(fan_GPIO_num, 1)
+        now_temp = SharedMemory[0]
+        target_temp = SharedMemory[1]
+        pwm = det_fan_pwm(now_temp, target_temp)
+        GPIO.output(fan_GPIO_num, 1)
         time.sleep(pwm)
-        #GPIO.output(fan_GPIO_num, 0)
+        GPIO.output(fan_GPIO_num, 0)
         time.sleep(0.01 - pwm)
-        print(temp)
-        time.sleep(1)

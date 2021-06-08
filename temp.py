@@ -4,7 +4,7 @@ import csv
 import random as rd
 from threading import Thread
 from fan import *
-from queue import Queue
+
 
 # find naem of sensor file
 def sensor_name():
@@ -17,7 +17,7 @@ def sensor_name():
 # read raw sensor data
 def temp_raw():
     temp_sensor = sensor_name()
-    f = open(temp_sensor,'r')
+    f = open(temp_sensor, 'r')
     lines = f.readlines()
     f.close()
     return lines
@@ -35,7 +35,7 @@ def calculate_temp():
         temp_string = lines[1].strip()[temp_output+2:]
         temp_c = float(temp_string)/1000.0
         
-    return temp_c # retrun celcius
+    return temp_c   # retrun celcius
 
 
 def write_temp(temp):
@@ -51,16 +51,12 @@ def write_temp_data(temp, n):
     f.close()
 
 
-def temp_main(t):
-    temp_queue = Queue()
-    fan_thread = Thread(target=fan_main, args=(temp_queue,))
+def temp_main(SharedMemory):
+    fan_thread = Thread(target=fan_main, args=(SharedMemory, ))
     fan_thread.start()
     while True:
-       # temp = calculate_temp()
-        temp = rd.randint(0, 10)        # test
-        t.put(temp)
-        temp_queue.put(temp)
-        print(temp)
+        now_temp = calculate_temp()
+        SharedMemory[0] = now_temp
         time.sleep(1)
 
 
