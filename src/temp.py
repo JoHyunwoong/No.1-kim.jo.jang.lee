@@ -45,7 +45,10 @@ def write_temp_data(temp, n):
     f.close()
 
 if __name__ == "__main__":
+    n = 1
     while(True):
         temp = read_temp()
+        write_temp_data(temp, n)
         print(temp)
         time.sleep(1)
+        n = n+1
