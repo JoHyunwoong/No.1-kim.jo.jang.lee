@@ -1,5 +1,6 @@
-pyqt 설치방법
-window - cmd - pip install pyqt5
-raspberry - sudo apt-get install python3-pyqt5
+<pyqt 설치>
+$ pyqt apt-get install python3-pyqt5
 
-실행해야하는 파일은 ui_main.py 
+<실행 방법>
+$ ./setting.sh
+$ python3 ui_main.py
