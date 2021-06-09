@@ -21,13 +21,16 @@ def pumpSso(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_sso):
         if isFirst1 == 1:
                 sec = (180 * rate) / amount_per_sec_sso + 0.8
                 isFirst1 = 0
+                amount_sso -= 180 * rate
         else:
             if amount_sso > (180 * rate) * (1 + 0.05):
                 sec = (180 * rate) / amount_per_sec_sso
+                amount_sso -= 180 * rate
             else:    # 뽑아야 하는 양보다 남은 양이 적을 때 우선 남은 양만 뽑기
                 sec = (amount_sso / amount_per_sec_sso) + 0.5
                 sso_2nd = (180 * rate) - amount_sso
                 isReplay1 = 1
+                amount_sso = 0
 
         # pump output
         GPIO.output(12, True)
@@ -50,5 +53,7 @@ def pumpSso(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_sso):
 
         isReplay1 = 0
         isFirst1 = 1
+        
+        amount_sso -= (sec - 0.8) * amount_per_sec_sso
 
         return isFirst1, isReplay1, amount_sso, sso_2nd
