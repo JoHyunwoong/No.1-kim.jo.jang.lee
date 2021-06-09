@@ -20,9 +20,9 @@ UI 디자인 변화
 
 ![ui_main](https://user-images.githubusercontent.com/81142510/121224264-5975c380-c8c3-11eb-8903-53cbe27d9143.PNG)
 
-![UI_home](https://user-images.githubusercontent.com/81142510/121224290-5f6ba480-c8c3-11eb-8b4c-f584a7447ac3.PNG)
+![UI_home2](https://user-images.githubusercontent.com/81142510/121378428-28a69480-c97e-11eb-9fc3-6ff26b25649f.PNG)
 
-![ui_monitor](https://user-images.githubusercontent.com/81142510/121224330-67c3df80-c8c3-11eb-8024-f3cf7368ba1b.PNG)
+![ui_monitor2](https://user-images.githubusercontent.com/81142510/121378548-4116af00-c97e-11eb-8e78-3c943aeec30f.PNG)
 
 ![ui_parameter](https://user-images.githubusercontent.com/81142510/121224341-6b576680-c8c3-11eb-8e31-40d2bc41e043.PNG)
 
