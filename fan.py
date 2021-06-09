@@ -1,4 +1,4 @@
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import os
 import pigpio
@@ -17,7 +17,6 @@ def read_temp():
 
 # Determine fan pwm value
 def det_fan_pwm(temp, target_temp):
-    print(target_temp)
     if (temp - target_temp) > 20:
         return 0.01
     else:

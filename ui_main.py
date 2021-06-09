@@ -38,7 +38,7 @@ class MainWindow(UIFunctions):
         self.ui.set_temperature_up_button.clicked.connect(self.temperature_up)
         self.ui.set_temperature_down_button.clicked.connect(self.temperature_down)
         self.ui.beer_slider.setValue(self.beer_percent)
-        self.ui.beer_slider.valueChanged.connect(lambda: self.ui.label_4.setText(str(self.ui.beer_slider.value())+"%"))
+        self.ui.beer_slider.valueChanged.connect(self.update_prograssbar)
         self.ui.stackedWidget.setCurrentWidget(self.ui.page)
 
         self.ui.btn_back.clicked.connect(self.showpage)

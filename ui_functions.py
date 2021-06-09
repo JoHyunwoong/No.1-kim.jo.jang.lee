@@ -55,8 +55,12 @@ class UIFunctions(QMainWindow):
     def pump2_parameter_calculate(self, number):
         self.amount_per_sec_mac += number
         self.ui.pump2_parameter.display(str(round(self.amount_per_sec_mac, 2)))
-
-    # 오류 팝업     poped1 연결
+    
+    def update_prograssbar(self):
+        self.ui.beer_progressbar_2.setValue(self.ui.beer_slider.value())
+        self.ui.beer_progressbar.setValue(100 - self.ui.beer_slider.value())
+        
+    # 오류 팝업    poped1 연결
     def show_popup(self, error_code):
         if error_code == 1:
             msg = QMessageBox()         # pump error

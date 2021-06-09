@@ -426,13 +426,13 @@ class Ui_MainWindow(object):
         self.frame_2.setLineWidth(0)
         self.frame_2.setObjectName("frame_2")
         self.label_2 = QtWidgets.QLabel(self.frame_2)
-        self.label_2.setGeometry(QtCore.QRect(80, 30, 251, 351))
+        self.label_2.setGeometry(QtCore.QRect(10, 30, 221, 341))
         self.label_2.setStyleSheet("image: url(:/newPrefix/beer_bottle4.png);")
         self.label_2.setText("")
         self.label_2.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_2.setObjectName("label_2")
         self.beer_slider = QtWidgets.QSlider(self.frame_2)
-        self.beer_slider.setGeometry(QtCore.QRect(400, 40, 60, 321))
+        self.beer_slider.setGeometry(QtCore.QRect(480, 50, 60, 311))
         font = QtGui.QFont()
         font.setPointSize(9)
         self.beer_slider.setFont(font)
@@ -440,7 +440,7 @@ class Ui_MainWindow(object):
 "    min-width: 60px;\n"
 "}\n"
 "QSlider::sub-page:vertical {\n"
-"background: rgba(246,193,1, 200);\n"
+"background: rgba(124,222,242, 200);\n"
 " \n"
 " }\n"
 "QSlider::add-page:vertical {\n"
@@ -471,7 +471,7 @@ class Ui_MainWindow(object):
         self.beer_slider.setOrientation(QtCore.Qt.Vertical)
         self.beer_slider.setObjectName("beer_slider")
         self.start_button = QtWidgets.QPushButton(self.frame_2)
-        self.start_button.setGeometry(QtCore.QRect(540, 150, 141, 81))
+        self.start_button.setGeometry(QtCore.QRect(610, 160, 141, 81))
         font = QtGui.QFont()
         font.setFamily("휴먼엑스포")
         font.setPointSize(16)
@@ -492,7 +492,7 @@ class Ui_MainWindow(object):
 "}")
         self.start_button.setObjectName("start_button")
         self.beer_progressbar = QtWidgets.QProgressBar(self.frame_2)
-        self.beer_progressbar.setGeometry(QtCore.QRect(110, 40, 191, 341))
+        self.beer_progressbar.setGeometry(QtCore.QRect(30, 30, 181, 331))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(36)
@@ -501,29 +501,46 @@ class Ui_MainWindow(object):
         self.beer_progressbar.setFont(font)
         self.beer_progressbar.setStyleSheet("\n"
 "QProgressBar::chunk:vertical {\n"
+"background-color: qlineargradient(spread:reflect, x1:0.506, y1:1, x2:1, y2:0, stop:0 rgba(124, 222, 242, 255), stop:1 rgba(124, 222, 242, 170));\n"
+"border-bottom-right-radius: 7px;\n"
+"border-bottom-left-radius: 7px;\n"
+"}")
+        self.beer_progressbar.setProperty("value", 30)
+        self.beer_progressbar.setAlignment(QtCore.Qt.AlignCenter)
+        self.beer_progressbar.setTextVisible(True)
+        self.beer_progressbar.setOrientation(QtCore.Qt.Vertical)
+        self.beer_progressbar.setObjectName("beer_progressbar")
+        self.label_4 = QtWidgets.QLabel(self.frame_2)
+        self.label_4.setGeometry(QtCore.QRect(230, 30, 221, 341))
+        self.label_4.setStyleSheet("image: url(:/newPrefix/beer_bottle4.png);")
+        self.label_4.setText("")
+        self.label_4.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_4.setObjectName("label_4")
+        self.beer_progressbar_2 = QtWidgets.QProgressBar(self.frame_2)
+        self.beer_progressbar_2.setGeometry(QtCore.QRect(250, 40, 181, 321))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(36)
+        font.setBold(False)
+        font.setWeight(50)
+        self.beer_progressbar_2.setFont(font)
+        self.beer_progressbar_2.setStyleSheet("\n"
+"QProgressBar::chunk:vertical {\n"
 "background-color: qlineargradient(spread:reflect, x1:0.506, y1:1, x2:1, y2:0, stop:0 rgba(246, 193, 1, 255), stop:1 rgba(246, 193, 1, 170));\n"
 "border-bottom-right-radius: 7px;\n"
 "border-bottom-left-radius: 7px;\n"
 "}")
-        self.beer_progressbar.setProperty("value", 100)
-        self.beer_progressbar.setTextVisible(False)
-        self.beer_progressbar.setOrientation(QtCore.Qt.Vertical)
-        self.beer_progressbar.setObjectName("beer_progressbar")
-        self.label_4 = QtWidgets.QLabel(self.frame_2)
-        self.label_4.setGeometry(QtCore.QRect(145, 120, 121, 71))
-        font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(44)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_4.setFont(font)
-        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_4.setObjectName("label_4")
+        self.beer_progressbar_2.setProperty("value", 70)
+        self.beer_progressbar_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.beer_progressbar_2.setTextVisible(True)
+        self.beer_progressbar_2.setOrientation(QtCore.Qt.Vertical)
+        self.beer_progressbar_2.setObjectName("beer_progressbar_2")
+        self.beer_progressbar_2.raise_()
         self.beer_progressbar.raise_()
         self.label_2.raise_()
-        self.beer_slider.raise_()
         self.start_button.raise_()
         self.label_4.raise_()
+        self.beer_slider.raise_()
         self.verticalLayout_6.addWidget(self.frame_2)
         self.stackedWidget.addWidget(self.page_home)
         self.page_monitor = QtWidgets.QWidget()
@@ -594,14 +611,14 @@ class Ui_MainWindow(object):
         self.drink2_replace_button.setFont(font)
         self.drink2_replace_button.setStyleSheet("QPushButton{\n"
 "color: rgb(255, 255, 255);\n"
-"background-color: rgba(124, 222, 242, 220);\n"
+"background-color: rgba(246, 193, 1, 220);\n"
 "border-radius:30px;\n"
 "    border:none;\n"
 "outline: none;\n"
 "\n"
 "}\n"
 "QPushButton:pressed {    \n"
-"    background-color: rgba(85, 170, 180);\n"
+"    background-color: rgba(246, 193, 1, 180);\n"
 "    border:none;\n"
 "outline: none;\n"
 "\n"
@@ -652,7 +669,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QProgressBar::chunk {\n"
-"background-color: rgba(124, 222, 242, 200);\n"
+"background-color: rgba(246, 193, 1, 200);\n"
 "border-bottom-right-radius: 7px;\n"
 "border-bottom-left-radius: 7px;\n"
 "}")
@@ -958,7 +975,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -967,7 +984,6 @@ class Ui_MainWindow(object):
         self.label_title_bar_top.setText(_translate("MainWindow", "K-CocktailMate"))
         self.btn_back.setToolTip(_translate("MainWindow", "Close"))
         self.start_button.setText(_translate("MainWindow", "제조 시작"))
-        self.label_4.setText(_translate("MainWindow", "70%"))
         self.drink1_replace_button.setText(_translate("MainWindow", "교체"))
         self.drink2_replace_button.setText(_translate("MainWindow", "교체"))
         self.drink1_residual_label.setText(_translate("MainWindow", "360ml"))
