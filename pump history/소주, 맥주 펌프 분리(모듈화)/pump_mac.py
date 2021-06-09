@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-def pumpMac(rate, isFirst, isReplay, amount_mac, mac_2nd, amount_per_sec_mac):
+def pumpMac(rate, isFirst2, isReplay2, amount_mac, mac_2nd, amount_per_sec_mac):
     speed = 100  # pump speed(pwm)
     sec = 0  # total sec of mac
     # amount_per_sec_mac = 28  # output of mac pump per second
@@ -17,17 +17,17 @@ def pumpMac(rate, isFirst, isReplay, amount_mac, mac_2nd, amount_per_sec_mac):
 
     my_pwm.ChangeDutyCycle(speed)  # start pwm
 
-    if isReplay != 1:
-        if isFirst == 1:
+    if isReplay2 != 1:
+        if isFirst2 == 1:
                 sec = (180 * (1 - rate)) / amount_per_sec_mac + 1.3
-                isFirst = 0
+                isFirst2 = 0
         else:
             if amount_mac > (180 * (1 - rate)) * (1 + 0.05):
                 sec = (180 * (1 - rate)) / amount_per_sec_mac
             else:    # 뽑아야 하는 양보다 남은 양이 적을 때 우선 남은 양만 뽑기
                 sec = (amount_mac / amount_per_sec_mac) + 0.5
                 mac_2nd = (180 * (1 - rate)) - amount_mac
-                isReplay = 1
+                isReplay2 = 1
 
         # pump output
         GPIO.output(13, True)
@@ -37,7 +37,7 @@ def pumpMac(rate, isFirst, isReplay, amount_mac, mac_2nd, amount_per_sec_mac):
 
         GPIO.cleanup()
 
-        return isFirst, isReplay, amount_mac, mac_2nd    # isReplay = 1 => UI 병체 알림
+        return isFirst2, isReplay2, amount_mac, mac_2nd    # isReplay = 1 => UI 병체 알림
 
     else:   # (뽑아야 하는 양 - 남은 양)을 마저 뽑기
         sec = (mac_2nd / amount_per_sec_mac) + 1.3
@@ -48,7 +48,7 @@ def pumpMac(rate, isFirst, isReplay, amount_mac, mac_2nd, amount_per_sec_mac):
         GPIO.output(13, False)
         GPIO.cleanup()
 
-        isReplay = 0
-        isFirst = 1
+        isReplay2 = 0
+        isFirst2 = 1
 
-        return isFirst, isReplay, amount_mac, mac_2nd
+        return isFirst2, isReplay2, amount_mac, mac_2nd
