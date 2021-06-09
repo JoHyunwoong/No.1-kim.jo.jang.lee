@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-def pumpSso(rate, isFirst, isReplay, amount_sso, sso_2nd, amount_per_sec_sso):
+def pumpSso(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_sso):
     speed = 100  # pump speed(pwm)
     sec = 0  # total sec of sso
     # amount_per_sec_sso = 32  # output of sso pump per second
@@ -17,17 +17,17 @@ def pumpSso(rate, isFirst, isReplay, amount_sso, sso_2nd, amount_per_sec_sso):
 
     my_pwm.ChangeDutyCycle(speed)  # start pwm
 
-    if isReplay != 1:
-        if isFirst == 1:
+    if isReplay1 != 1:
+        if isFirst1 == 1:
                 sec = (180 * rate) / amount_per_sec_sso + 0.8
-                isFirst = 0
+                isFirst1 = 0
         else:
             if amount_sso > (180 * rate) * (1 + 0.05):
                 sec = (180 * rate) / amount_per_sec_sso
             else:    # 뽑아야 하는 양보다 남은 양이 적을 때 우선 남은 양만 뽑기
                 sec = (amount_sso / amount_per_sec_sso) + 0.5
                 sso_2nd = (180 * rate) - amount_sso
-                isReplay = 1
+                isReplay1 = 1
 
         # pump output
         GPIO.output(12, True)
@@ -37,7 +37,7 @@ def pumpSso(rate, isFirst, isReplay, amount_sso, sso_2nd, amount_per_sec_sso):
 
         GPIO.cleanup()
 
-        return isFirst, isReplay, amount_sso, sso_2nd   # isReplay = 1 => UI 병체 알림
+        return isFirst1, isReplay1, amount_sso, sso_2nd   # isReplay = 1 => UI 병체 알림
 
     else:    # (뽑아야 하는 양 - 남은 양)을 마저 뽑기
         sec = (sso_2nd / amount_per_sec_sso) + 0.8
@@ -48,7 +48,7 @@ def pumpSso(rate, isFirst, isReplay, amount_sso, sso_2nd, amount_per_sec_sso):
         GPIO.output(12, False)
         GPIO.cleanup()
 
-        isReplay = 0
-        isFirst = 1
+        isReplay1 = 0
+        isFirst1 = 1
 
-        return isFirst, isReplay, amount_sso, sso_2nd
+        return isFirst1, isReplay1, amount_sso, sso_2nd
