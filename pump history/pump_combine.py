@@ -154,4 +154,4 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
             return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd
 
     except:
-            return 0
+            return 0, 0, 0, 0, 0, 0, 0, 0
