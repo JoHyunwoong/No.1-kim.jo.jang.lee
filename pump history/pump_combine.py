@@ -26,7 +26,7 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
 
     try:
 
-        if isReplay1 != 1:  #소주를 교체하지 않고 다시 실행하는가? 0이면 yes 1이면 no
+        if (isReplay1 != 1) and (isReplay2 != 1):  #소주와 맥주를 교체하지 않고 다시 실행하는가? 0이면 yes 1이면 no
             if isFirst1 == 1: #소주 실행이 처음인가?(UI 처음 실행할 때 혹은 교체 후에는 값이 1이 됨)
                     sec1 = (180 * rate) / amount_per_sec_sso + 0.65
                     isFirst1 = 0
@@ -41,8 +41,6 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
                     sso_2nd = (180 * rate) - amount_sso
                     isReplay1 = 1
                     amount_sso = 0
-
-        if isReplay2 != 1: #맥주를 교체하지 않고 다시 실행하는가? 0이면 yes 1이면 no
             if isFirst2 == 1:  #맥주 실행이 처음인가?(UI 처음 실행할 때 혹은 교체 후에는 값이 1이 됨)
                     sec2 = (180 * (1 - rate)) / amount_per_sec_mac + 1 + 1.9
                     isFirst2 = 0
@@ -58,19 +56,19 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
                     isReplay2 = 1
                     amount_mac = 0
 
-        # pump output
-        GPIO.output(12, True)
-        GPIO.output(13, True)
+            # pump output
+            GPIO.output(12, True)
+            GPIO.output(13, True)
 
-        time.sleep(sec1)
-        GPIO.output(12, False)
+            time.sleep(sec1)
+            GPIO.output(12, False)
 
-        time.sleep(sec2 - sec1)
-        GPIO.output(13, False)
+            time.sleep(sec2 - sec1)
+            GPIO.output(13, False)
 
-        GPIO.cleanup()
+            GPIO.cleanup()
 
-        return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd
+            return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd
 
         if (isReplay1 == 1) and (isReplay2 == 1) :    #소주와 맥주 둘 다 교체한 후 처음 실행이라면
             sec1 = (sso_2nd / amount_per_sec_sso) + 0.8
