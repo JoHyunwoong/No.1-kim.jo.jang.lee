@@ -2,8 +2,16 @@ import RPi.GPIO as GPIO
 import time
 
 # 변수 이름 마지막이 1이면 소주의 변수이고 2이면 맥주의 변수
+# rate = 비율(소주양/전체양)
+# isFirst1, 2 = 1은 소주의 출력이 처음인가? 혹은 교체 후인가? 1이면 yes, 1이 아니면 no 2는 똑같이 맥주에 대한 것
+# isReplay1, 2 = 소주 혹은 맥주의 병을 교체한 후 처음 실행인가? 1이면 yes 1이 아니면 no
+# amount_sso, amount_mac = 순서대로 각각 소주, 맥주의 남은 양
+# sso_2nd, mac_2nd = 순서대로 각각 소주, 맥주의 병 교체 후 실행시 직전 실행에서 부족했던 양을 마저 뽑아야 하는 양
+# amount_per_sec_sso, amount_per_sec_mac = 순서대로 각각 소주와 맥주 펌프의 시간당 출력양
+# isError = 1일 때는 소주병을 교체하라는 의미, 2는 맥주병을 교체, 나머지 3~6은 리턴값을 주기 위해 할당한 것으로 의미를 지니지는 않음
+# try-except에서 에러시 7을 9개 리턴
 
-def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_sso, isFirst2, isReplay2, amount_mac, mac_2nd, amount_per_sec_mac):
+def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_sso, isFirst2, isReplay2, amount_mac, mac_2nd, amount_per_sec_mac, isError):
     speed = 100  # pump speed(pwm)
     sec1 = 0  #소주의 출력시간
     sec2 = 0  #맥주의 출력시간
@@ -41,6 +49,7 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
                     sso_2nd = (180 * rate) - amount_sso
                     isReplay1 = 1
                     amount_sso = 0
+                    isError = 1
             if isFirst2 == 1:  #맥주 실행이 처음인가?(UI 처음 실행할 때 혹은 교체 후에는 값이 1이 됨)
                     sec2 = (180 * (1 - rate)) / amount_per_sec_mac + 1 + 1.9
                     isFirst2 = 0
@@ -55,6 +64,7 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
                     mac_2nd = (180 * (1 - rate)) - amount_mac
                     isReplay2 = 1
                     amount_mac = 0
+                    isError = 2
 
             # pump output
             GPIO.output(12, True)
@@ -68,7 +78,7 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
 
             GPIO.cleanup()
 
-            return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd
+            return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd, isError
 
         if (isReplay1 == 1) and (isReplay2 == 1) :    #소주와 맥주 둘 다 교체한 후 처음 실행이라면
             sec1 = (sso_2nd / amount_per_sec_sso) + 0.8
@@ -91,11 +101,12 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
                 isFirst1 = 1
                 isReplay2 = 0
                 isFirst2 = 1
+                isError = 3
         
                 amount_sso -= (sec1 - 0.8) * amount_per_sec_sso
                 amount_mac -= (sec2 - 1.3) * amount_per_sec_mac
 
-                return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd
+                return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd, isError
 
             else:   # 맥주 출력시간이 소주 출력시간보다 작을 경우의 gpio 출력
             
@@ -115,11 +126,12 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
                 isFirst1 = 1
                 isReplay2 = 0
                 isFirst2 = 1
+                isError = 4
         
                 amount_sso -= (sec1 - 0.8) * amount_per_sec_sso
                 amount_mac -= (sec2 - 1.3) * amount_per_sec_mac
 
-                return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd
+                return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd, isError
 
         if (isReplay1 == 1) and (isReplay2 != 1) :    #소주만 교체한 후 처음 실행이라면
             sec1 = (sso_2nd / amount_per_sec_sso) + 0.8
@@ -132,10 +144,11 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
 
             isReplay1 = 0
             isFirst1 = 1
+            isError = 5
         
             amount_sso -= (sec1 - 0.8) * amount_per_sec_sso
 
-            return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd
+            return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd, isError
 
         if (isReplay1 != 1) and (isReplay2 == 1) :   #맥주만 교체한 후 처음 실행이라면
             sec2 = (sso_2nd / amount_per_sec_sso) + 1.3
@@ -148,10 +161,11 @@ def pumpAlcohol(rate, isFirst1, isReplay1, amount_sso, sso_2nd, amount_per_sec_s
 
             isReplay2 = 0
             isFirst2 = 1
+            isError = 6
         
             amount_mac -= (sec2 - 1.3) * amount_per_sec_mac
 
-            return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd
+            return isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd, isError
 
     except:
-            return 0, 0, 0, 0, 0, 0, 0, 0
+            return 7, 7, 7, 7, 7, 7, 7, 7, 7
