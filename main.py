@@ -6,8 +6,8 @@ if __name__ == "__main__":
     Manager = Manager()
     SharedMemory = Manager.list()
     f = open('default.txt', 'r')
-    for _ in range(6):
-        SharedMemory.append(int(f.readline()))  # now_temp, target_temp, beer_percent, amount_per_sec_mac, amount_per_sec_sso, servo
+    for _ in range(5):
+        SharedMemory.append(eval(f.readline()))  # now_temp, target_temp, beer_percent, amount_per_sec_mac, amount_per_sec_sso
     f.close()
 
     p1 = Process(name="ui_main", target=ui_main, args=(SharedMemory, ))

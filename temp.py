@@ -8,7 +8,7 @@ from fan import *
 
 # find naem of sensor file
 def sensor_name():
-    f = open("../data/sensorname.txt", 'r')
+    f = open("./data/sensorname.txt", 'r')
     s = f.readline()
     temp_sensor = "/sys/bus/w1/devices/" + s.strip('\n') + "/w1_slave"
     f.close()
@@ -39,13 +39,13 @@ def calculate_temp():
 
 
 def write_temp(temp):
-    f = open("../data/temperature.txt", 'w')
+    f = open("./data/temperature.txt", 'w')
     f.write(str(temp))
     f.close()
 
 
 def write_temp_data(temp, n):
-    f = open("../data/temp.csv", 'a')
+    f = open("./data/temp.csv", 'a')
     wr = csv.writer(f)
     wr.writerow([n, temp])
     f.close()
