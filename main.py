@@ -19,13 +19,17 @@ if __name__ == "__main__":
     while True:
         if not (p1.is_alive()) and p2.is_alive():
             p2.kill()
+            time.sleep(1)
             break
+            
+        '''
         while i < 3:
             if not(p1.is_alive()) and p2.is_alive():
                 time.sleep(1)
                 p1 = Process(name="ui_main", target=ui_main, args=(SharedMemory,))
                 p1.start()
                 i += 1
+        '''
 
 
 
