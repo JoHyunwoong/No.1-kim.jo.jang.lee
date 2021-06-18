@@ -104,14 +104,14 @@ class MainWindow(UIFunctions):
 
 
     def update_temperature(self, data):
-        self.now_temp = round(self.now_temp, 2)
+        self.now_temp = round(data, 2)
         self.ui.now_temperature_qlcd.display(str(self.now_temp))
 
 
 # read q and connect thread
 class Consumer(QThread):
     poped1 = pyqtSignal(int)
-    poped2 = pyqtSignal(int)
+    poped2 = pyqtSignal(float)
 
     def __init__(self, q, SharedMemory):
         super().__init__()
