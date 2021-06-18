@@ -935,7 +935,7 @@ class Ui_MainWindow(object):
         self.page_settings = QtWidgets.QWidget()
         self.page_settings.setObjectName("page_settings")
         self.comboBox = QtWidgets.QComboBox(self.page_settings)
-        self.comboBox.setGeometry(QtCore.QRect(100, 70, 151, 60))
+        self.comboBox.setGeometry(QtCore.QRect(100, 70, 241, 81))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -943,17 +943,20 @@ class Ui_MainWindow(object):
         self.comboBox.setSizePolicy(sizePolicy)
         self.comboBox.setMinimumSize(QtCore.QSize(150, 60))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(23)
         self.comboBox.setFont(font)
-        self.comboBox.setStyleSheet("border: 1px solid white;")
+        self.comboBox.setStyleSheet("QComboBox{\n"
+"border: 1px solid white;\n"
+"padding:1px 0px 1px 3px;\n"
+"\n"
+"}")
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
-        self.comboBox.addItem("")
         self.pushButton = QtWidgets.QPushButton(self.page_settings)
-        self.pushButton.setGeometry(QtCore.QRect(440, 70, 201, 61))
+        self.pushButton.setGeometry(QtCore.QRect(440, 70, 241, 81))
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setPointSize(18)
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("border:1px solid white;")
         self.pushButton.setObjectName("pushButton")
@@ -998,7 +1001,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1013,10 +1016,10 @@ class Ui_MainWindow(object):
         self.drink2_residual_label.setText(_translate("MainWindow", "500ml"))
         self.label_3.setText(_translate("MainWindow", "2번 펌프 출력양"))
         self.label.setText(_translate("MainWindow", "1번 펌프 출력양"))
-        self.comboBox.setItemText(0, _translate("MainWindow", "도레미"))
-        self.comboBox.setItemText(1, _translate("MainWindow", "띵동"))
-        self.comboBox.setItemText(2, _translate("MainWindow", "띵"))
-        self.pushButton.setText(_translate("MainWindow", "현재 설정값 기본값으로 저장"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "소리 켜기"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "소리 끄기"))
+        self.pushButton.setText(_translate("MainWindow", "현재 설정값   \n"
+"기본값으로 저장"))
 import test_rc
 
 

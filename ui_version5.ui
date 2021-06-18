@@ -833,7 +833,7 @@ QPushButton:pressed {
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset resource="C:/Users/HyobinJang/Downloads/test.qrc">
+                      <iconset resource="../Downloads/test.qrc">
                        <normaloff>:/16*16/Simple_PySide_Base-master (1)/Simple_PySide_Base-master/icons/16x16/cil-action-undo.png</normaloff>:/16*16/Simple_PySide_Base-master (1)/Simple_PySide_Base-master/icons/16x16/cil-action-undo.png</iconset>
                      </property>
                     </widget>
@@ -943,7 +943,7 @@ QPushButton:pressed {
                    <number>0</number>
                   </property>
                   <property name="currentIndex">
-                   <number>4</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="page">
                    <widget class="QPushButton" name="btn_home">
@@ -2087,8 +2087,8 @@ QPushButton:pressed {
                      <rect>
                       <x>100</x>
                       <y>70</y>
-                      <width>151</width>
-                      <height>60</height>
+                      <width>241</width>
+                      <height>81</height>
                      </rect>
                     </property>
                     <property name="sizePolicy">
@@ -2105,25 +2105,24 @@ QPushButton:pressed {
                     </property>
                     <property name="font">
                      <font>
-                      <pointsize>14</pointsize>
+                      <pointsize>23</pointsize>
                      </font>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">border: 1px solid white;</string>
+                     <string notr="true">QComboBox{
+border: 1px solid white;
+padding:1px 0px 1px 3px;
+
+}</string>
                     </property>
                     <item>
                      <property name="text">
-                      <string>도레미</string>
+                      <string>소리 켜기</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>띵동</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>띵</string>
+                      <string>소리 끄기</string>
                      </property>
                     </item>
                    </widget>
@@ -2132,20 +2131,21 @@ QPushButton:pressed {
                      <rect>
                       <x>440</x>
                       <y>70</y>
-                      <width>201</width>
-                      <height>61</height>
+                      <width>241</width>
+                      <height>81</height>
                      </rect>
                     </property>
                     <property name="font">
                      <font>
-                      <pointsize>10</pointsize>
+                      <pointsize>18</pointsize>
                      </font>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">border:1px solid white;</string>
                     </property>
                     <property name="text">
-                     <string>현재 설정값 기본값으로 저장</string>
+                     <string>현재 설정값   
+기본값으로 저장</string>
                     </property>
                    </widget>
                   </widget>
@@ -2259,7 +2259,7 @@ QPushButton:pressed {
   </widget>
  </widget>
  <resources>
-  <include location="C:/Users/HyobinJang/Downloads/test.qrc"/>
+  <include location="../Downloads/test.qrc"/>
  </resources>
  <connections/>
 </ui>
