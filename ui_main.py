@@ -98,7 +98,8 @@ class MainWindow(UIFunctions):
                 = isFirst1, isReplay1, amount_sso, sso_2nd, isFirst2, isReplay2, amount_mac, mac_2nd
             self.error_code_queue.put(isError)
             print(isError, self.amount_sso, self.amount_mac)  # test print
-            if not(isError == 1 or isError == 2):
+            if not(isError == 1 or isError == 2) and str(self.ui.comboBox.currentText()) == "소리 켜기":
+                print("부저 작동")
                 buzzer()
 
 
