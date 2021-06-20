@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=NAME
+Exec=lxterminal -e /usr/bin/sudo /usr/bin/python3 /home/pi/project/main.py
+Type=Application

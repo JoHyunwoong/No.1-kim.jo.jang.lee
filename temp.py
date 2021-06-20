@@ -1,35 +1,64 @@
-'''
-사전 순서: 1. 명령창에 sudo modprobe w1-gpio && sudo modprode w1_therm 
-          2. 명령창에 sudo nano /boot/config.text (config.text 파일 열기 위함)
-          3. config.text 파일 마지막에 dtoverlay = w1-gpio 추가
-          4. 명령창에 ls -l /sys/bus/w1/devices/ 친 후 장치 주소 확인(28-00000xxxxx)
-'''
-      
-import RPi.GPIO as GPIO
+import os
 import time
+import csv
+import random as rd
+from threading import Thread
+from fan import *
 
 
-def displayTemp():
+# find naem of sensor file
+def sensor_name():
+    f = open("./data/sensorname.txt", 'r')
+    s = f.readline()
+    temp_sensor = "/sys/bus/w1/devices/" + s.strip('\n') + "/w1_slave"
+    f.close()
+    return temp_sensor
 
-    # gpio 모드 설정
-    GPIO.setmode(GPIO.BOARD)
-    # gpio 초기 셋업
-    GPIO.setup(1, GPIO.OUT)
-    GPIO.setup(7, GPIO.IN)
-    # gpio 출력
-    GPIO.output(1, GPIO.TURE)
-    GPIO.input(7)
+# read raw sensor data
+def temp_raw():
+    temp_sensor = sensor_name()
+    f = open(temp_sensor, 'r')
+    lines = f.readlines()
+    f.close()
+    return lines
+
+# calculate temperature
+def calculate_temp():
+    lines = temp_raw()
+    while (lines[0].strip()[-3:]!="YES"):
+        time.sleep(0.2)
+        lines = temp_raw()
     
-    # temperature 받기
-    tempFile = open("/sys/bus/w1/devices/장치 주소(사전 순서 3)/w1_slave")
-    theText = tempFile.read()
-    tempFile.close()
-    tempDate = theText.split("\n")[1].split(" ")[9]
-    temperature = float(tempData[2:])
-    temperature = temperature / 1000
-          
-    # gpio 종료
-    GPIO.output(1, False)
-    GPIO.cleanup()
+    temp_output = lines[1].find('t=')
 
-    return temperature
+    if(temp_output != -1):
+        temp_string = lines[1].strip()[temp_output+2:]
+        temp_c = float(temp_string)/1000.0
+        
+    return temp_c   # retrun celcius
+
+
+def write_temp(temp):
+    f = open("./data/temperature.txt", 'w')
+    f.write(str(temp))
+    f.close()
+
+
+def write_temp_data(temp, n):
+    f = open("./data/temp.csv", 'a')
+    wr = csv.writer(f)
+    wr.writerow([n, temp])
+    f.close()
+
+
+def temp_main(SharedMemory):
+    fan_thread = Thread(target=fan_main, args=(SharedMemory, ))
+    fan_thread.start()
+    while True:
+        now_temp = calculate_temp()
+        SharedMemory[0] = now_temp
+        time.sleep(1)
+
+
+if __name__ == "__main__":
+    temp_main()
