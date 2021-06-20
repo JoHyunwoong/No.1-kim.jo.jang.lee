@@ -25,7 +25,7 @@ UI 디자인 변화
 
 **UI 실행 화면**
 
-![ui_main](https://user-images.githubusercontent.com/81142510/121224264-5975c380-c8c3-11eb-8903-53cbe27d9143.PNG)
+![ui_main](https://user-images.githubusercontent.com/81142510/122669953-7c28a600-d1fa-11eb-8cd1-ddc28abf4fbe.PNG)
 
 ![UI_home2](https://user-images.githubusercontent.com/81142510/121378428-28a69480-c97e-11eb-9fc3-6ff26b25649f.PNG)
 
