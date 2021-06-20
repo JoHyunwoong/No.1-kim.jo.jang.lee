@@ -36,6 +36,3 @@ UI 디자인 변화
 ![ui_setting](https://user-images.githubusercontent.com/81142510/122669894-484d8080-d1fa-11eb-8941-fe42eb34103d.PNG)
 
 
-setting 화면은 제작예정
-
-기본값 설정 및 부저음 설정기능 추가예정
