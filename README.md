@@ -33,7 +33,8 @@ UI 디자인 변화
 
 ![ui_parameter](https://user-images.githubusercontent.com/81142510/121224341-6b576680-c8c3-11eb-8e31-40d2bc41e043.PNG)
 
-![ui_setting](https://user-images.githubusercontent.com/81142510/121224354-6db9c080-c8c3-11eb-8e46-b3bb5699a199.PNG)
+![ui_setting](https://user-images.githubusercontent.com/81142510/122669894-484d8080-d1fa-11eb-8941-fe42eb34103d.PNG)
+
 
 setting 화면은 제작예정
 
